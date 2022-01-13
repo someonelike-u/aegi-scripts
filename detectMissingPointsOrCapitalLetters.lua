@@ -21,7 +21,7 @@ function startScript(subs)
 
             if firstlineIdx == nil then firstlineIdx = i end
 
-            if not sub.comment and notContainsWKNCredits(sub.text) then
+            if not sub.comment then
                 nextText = ''
                 previousText = ''
 
@@ -140,25 +140,6 @@ function cleanTagsAndDashes(text)
     textCleaned = textCleaned:gsub('– ', '')
     textCleaned = textCleaned:gsub('— ', '')
     return textCleaned
-end
-
---- Check a text if it does not contain WKN credits
----@param text string: Text to check
----@return boolean: True if the text does not contain WKN credits
-function notContainsWKNCredits(text)
-    cleanNonSpacingBreak = text:gsub(' ', ' ')
-    cleanNonSpacingBreak = cleanNonSpacingBreak:gsub(' ', ' ')
-
-    if not cleanNonSpacingBreak:find('Supervision du projet :') and
-        not cleanNonSpacingBreak:find('Supervision :') and
-        not cleanNonSpacingBreak:find('Repérage :') and
-        not cleanNonSpacingBreak:find('Traduction :') and
-        not cleanNonSpacingBreak:find('Relecture :') and
-        not cleanNonSpacingBreak:find('Publication :') then
-        return true
-    else
-        return false
-    end
 end
 
 ---------------------------------------------------------------------
